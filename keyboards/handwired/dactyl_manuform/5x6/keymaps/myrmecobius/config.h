@@ -24,11 +24,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //#define EE_HANDS
 
-#define ENCODERS_PAD_A { B12 }
-#define ENCODERS_PAD_B { B13 }
-#define ENCODER_RESOLUTIONS { 4 }
-#define ENCODERS_PAD_A_RIGHT { B12 }
-#define ENCODERS_PAD_B_RIGHT { B13 }
-#define ENCODER_RESOLUTIONS_RIGHT { 4 }
+// #define ENCODERS_PAD_A { B12 }
+// #define ENCODERS_PAD_B { B13 }   
+// #define ENCODER_RESOLUTIONS { 4 }
+// #define ENCODERS_PAD_A_RIGHT { B12 }
+// #define ENCODERS_PAD_B_RIGHT { B13 }
+// #define ENCODER_RESOLUTIONS_RIGHT { 4 }
 
-
+// Trackball
+// # define PMW33XX_CS_PIN F6
+// # define PMW33XX_CPI 1600
+// #define SPLIT_POINTING_ENABLE
+// #define POINTING_DEVICE_RIGHT
+// #define POINTING_DEVICE_INVERT_Y

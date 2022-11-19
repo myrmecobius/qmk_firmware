@@ -8,8 +8,8 @@
 #define OSM_SFT OSM(MOD_LSFT)
 #define OSM_CTL OSM(MOD_LCTL)
 // #define CM TO(_COLEMAK)
-// #define SYM TO(_SYMBOLS)
-// #define NVNM TO(_NAVNUM)
+ #define SYM TO(_SYMBOLS)
+ #define NVNM TO(_NAVNUM)
 
 // KeyMap ---------------------------------------------------------------------
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -19,7 +19,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         OSM_SFT, KC_A  , KC_R  , KC_S  , KC_T  , KC_G  ,                         KC_M  , KC_N  , KC_E  , KC_I  , KC_O  ,OSM_SMB,
         OSM_CTL, KC_Z  , KC_X  , KC_C  , KC_D  , KC_V  ,                         KC_K  , KC_H  ,KC_COMM,KC_DOT ,KC_SLSH,KC_BSLASH,
                          KC_LBRC,KC_RBRC,                                                       KC_PLUS, KC_EQL,
-                                         RAISE,KC_SPC,                        KC_ENT, LOWER,
+                                         SYM   ,KC_SPC,                          KC_ENT, NVNM  ,
                                          KC_TAB,KC_HOME,                         KC_END,  KC_DEL,
                                          KC_BSPC, KC_GRV,                        KC_LGUI, KC_LALT
     ),
@@ -48,12 +48,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
+// Trackball
+// void pointing_device_init_kb(void) {
+// #ifdef PMW33XX_CPI
+//     pointing_device_set_cpi(PMW33XX_CPI);
+// #endif
+// }
+
+/*
 // Encoder Section ------------------------------------------------------------
 void lr_mode(bool clockwise){
     if (clockwise) {
         tap_code(KC_RGHT);
     } else {
-        tap_code(KC_LEFT)
+        tap_code(KC_LEFT);
     }
 }
 
@@ -61,7 +69,7 @@ void ud_mode(bool clockwise){
     if (clockwise) {
         tap_code(KC_DOWN);
     } else {
-        tap_code(KC_UP)
+        tap_code(KC_UP);
     }
 }
 
@@ -69,7 +77,7 @@ void scroll_mode(bool clockwise){
     if (clockwise) {
         tap_code(KC_WH_D);
     } else {
-        tap_code(KC_WH_U)
+        tap_code(KC_WH_U);
     }
 }
 
@@ -77,7 +85,7 @@ void volume_mode(bool clockwise){
     if (clockwise) {
         tap_code(KC_VOLD);
     } else {
-        tap_code(KC_VOLU)
+        tap_code(KC_VOLU);
     }
 }
 
@@ -85,7 +93,7 @@ void LED_brightness(bool clockwise){
     if (clockwise) {
         tap_code(KC_VOLD);
     } else {
-        tap_code(KC_VOLU)
+        tap_code(KC_VOLU);
     }
 }
 
@@ -93,7 +101,7 @@ void LED_hue(bool clockwise){
     if (clockwise) {
         tap_code(KC_VOLD);
     } else {
-        tap_code(KC_VOLU)
+        tap_code(KC_VOLU);
     }
 }
 
@@ -101,16 +109,16 @@ static void (*left_modes[3])() = {ud_mode, volume_mode, LED_brightness};
 
 static void (*right_modes[3])() = {lr_mode, scroll_mode, LED_hue};
 
-static int current_mode_left = 0;
+static uint8_t current_mode_left = 0;
 
-static int current_mode_right = 0;
+static uint8_t current_mode_right = 0;
 
 void encoder_increment_left(){
-    current_mode_left = (current_mode_left + 1) % 3
+    current_mode_left = (current_mode_left + 1) % 3;
 }
 
 void encoder_increment_right(){
-    current_mode_right = (current_mode_right + 1) % 3
+    current_mode_right = (current_mode_right + 1) % 3;
 }
 
 void encoder_tap_left(){
@@ -119,7 +127,7 @@ void encoder_tap_left(){
         // Not defined
         return;
     case 1: // volume mode
-        tap_code(KC_MUTE)
+        tap_code(KC_MUTE);
         return;
     case 2: // LED brightness toggle
         // toggle LED on/off
@@ -130,10 +138,10 @@ void encoder_tap_left(){
 void encoder_tap_right(){
     switch (current_mode_right) {
     case 0: // Left/Right mode
-        tap_code(KC_SPC)
+        tap_code(KC_SPC);
         return;
     case 1: // Scroll mode
-        tap_code(KC_BTN3)
+        tap_code(KC_BTN3);
         return;
     case 2: // LED hue toggle
         // toggle LED pattern
@@ -169,7 +177,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-    /* Sample Key
+    / * Sample Key
     case KC_KEYCODE:
         if (record->event.pressed) {
         // Do something when pressed
@@ -177,28 +185,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // Do something else when release
         }
         return false; // true: continue processing key | false: stop processing key
-    */
+    * /
     case KC_EIL:
         if (record->event.pressed) {
-            encoder_increment_left()
+            encoder_increment_left();
         }
         return false;
     case KC_EIR:
         if (record->event.pressed) {
-            encoder_increment_right()
+            encoder_increment_right();
         }
         return false;
     case KC_ETL:
         if (record->event.pressed) {
-            encoder_tap_left()
+            encoder_tap_left();
         }
         return false;
     case KC_ETR:
         if (record->event.pressed) {
-            encoder_tap_right()
+            encoder_tap_right();
         }
         return false;
     default:
         return true; // Process all other keycodes normally
     }
 }
+*/
